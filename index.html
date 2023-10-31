@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Holiday Cocktails</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f3f3f3;
+        }
+        .card {
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            max-width: 300px;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .card img {
+            max-width: 100%;
+        }
+        .card h3 {
+            margin: 10px 0;
+        }
+        .recipe {
+            display: none;
+        }
+        .calories {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Holiday Cocktails & Mocktails</h1>
+    <div id="cocktail-list">
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Define an array of holiday cocktails/mocktails with images, recipes, and calories
+        var cocktails = [
+            {
+                name: "Eggnog",
+                ingredients: "Eggs, milk, spices",
+                image: "Eggnog.jpg",
+                recipe: "1. Mix eggs, milk, and spices.",
+                calories: "150 calories"
+            },
+            {
+                name: "Mistletoe Mojito",
+                ingredients: "Mint, cranberry, rum",
+                image: "Mistletoe Mojito.jpg",
+                recipe: "1. Muddle mint and cranberry.\n2. Add rum and ice.\n3. Top with soda.",
+                calories: "120 calories"
+            },
+            {
+                name: "Holiday Punch",
+                ingredients: "Fruit juices, soda, spices",
+                image: "holiday_punch.jpg",
+                recipe: "1. Combine fruit juices, soda, and spices.",
+                calories: "80 calories"
+            },
+            {
+                name: "Cranberry Spritzer",
+                ingredients: "Cranberry juice, sparkling water",
+                image: "cranberry_spritzer.jpg",
+                recipe: "1. Mix cranberry juice and sparkling water.",
+                calories: "60 calories"
+            },
+            {
+                name: "Peppermint Hot Chocolate",
+                ingredients: "Hot chocolate, peppermint syrup",
+                image: "peppermint_mocha_martini.jpg",
+                recipe: "1. Prepare hot chocolate.\n2. Add peppermint syrup and top with whipped cream.",
+                calories: "200 calories"
+            },
+        ];
+
+        // Function to display cocktails with hover recipe and click calories
+        function displayCocktails() {
+            var $cocktailList = $("#cocktail-list");
+
+            cocktails.forEach(function (cocktail) {
+                var $card = $("<div class='card'></div>");
+                $card.append("<img src='" + cocktail.image + "' alt='" + cocktail.name + "'>");
+                $card.append("<h3>" + cocktail.name + "</h3>");
+                $card.append("<p>Main Ingredients: " + cocktail.ingredients + "</p>");
+                $card.append("<p class='recipe'>" + cocktail.recipe + "</p>");
+                $card.append("<p class='calories'>" + cocktail.calories + "</p>");
+
+                $card.on("click", function () {
+                    // Show calories on click
+                    $(this).find(".recipe").hide();
+                    $(this).find(".calories").show();
+                });
+
+                $card.hover(function () {
+                    // Hide calories and show recipe on hover
+                    $(this).find(".recipe").show();
+                    $(this).find(".calories").hide();
+                }, function () {
+                    // Reset to show name and main ingredients
+                    $(this).find(".recipe").hide();
+                    $(this).find(".calories").hide();
+                });
+
+                $cocktailList.append($card);
+            });
+        }
+
+        // Call the function to display cocktails on page load
+        $(document).ready(function () {
+            displayCocktails();
+        });
+    </script>
+</body>
+</html>
